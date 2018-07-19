@@ -105,3 +105,24 @@ server.put('/update/:id', function (req, res, next) {
  
 });
 
+//Excluindo dados
+
+server.del('/delete/:id', function (req, res, next) {
+  
+  const { id} = req.params;
+
+  knex('rest')
+   
+   .where('id', id)
+   
+   .delete()
+    
+   .then((dados)=>{
+
+   if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado') )
+    res.send('dados excluidos');
+
+  },next);
+ 
+ 
+});
