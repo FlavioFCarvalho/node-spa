@@ -1,5 +1,7 @@
 var restify = require('restify');
 
+var errs = require('restify-errors');
+
 const server = restify.createServer({
   name: 'myapp',
   version: '1.0.0'
@@ -32,14 +34,15 @@ server.listen(8080, function () {
 
 server.get('/', function (req, res, next) {
   
-   knex('rest').then((dados)=>{
+  knex('rest').then((dados)=>{
 
-    res.send(dados);
+   res.send(dados);
 
-   },next);
-  
-  return next();
+  },next);
+ 
+ return next();
 });
+
 
 //Inserindo dados
 
@@ -54,5 +57,29 @@ server.post('/create', function (req, res, next) {
   },next);
  
  return next();
+});
+
+
+
+// Consulta dados por id
+
+server.get('/show/:id', function (req, res, next) {
+  
+  const { id} = req.params;
+
+  knex('rest')
+   
+   .where('id', id)
+   
+   .first()
+    
+   .then((dados)=>{
+
+   if (!dados) return res.send(new errs.BadRequestError('nada foi encontrado') )
+    res.send(dados);
+
+  },next);
+ 
+ 
 });
 
