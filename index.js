@@ -28,6 +28,8 @@ server.listen(8080, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
 
+//Listando dados
+
 server.get('/', function (req, res, next) {
   
    knex('rest').then((dados)=>{
@@ -38,3 +40,19 @@ server.get('/', function (req, res, next) {
   
   return next();
 });
+
+//Inserindo dados
+
+server.post('/create', function (req, res, next) {
+  
+  knex('rest')
+    .insert(req.body) 
+    .then((dados)=>{
+
+      res.send(dados);
+
+  },next);
+ 
+ return next();
+});
+
