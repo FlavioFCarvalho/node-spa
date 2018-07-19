@@ -37,6 +37,36 @@
         </div>
      
     </div>
-    
+    <script>
+
+        window.onload = () => {
+            read();
+        };
+
+        function read(){
+        
+          //limpando a lista
+          lista.innerHTML = '';
+
+          //chamada ajax para o servidor na rota / read
+
+          axios.get('/read')
+            .then((response) =>{
+                console.log(response);
+
+                response.data.forEach(element => {
+                    lista.innerHTML += `<li>${element.name} </li> `
+                });
+            })
+
+            .catch((error) =>{
+                console.log(error);
+            });
+        }
+
+
+
+
+    </script>
 </body>
 </html>
