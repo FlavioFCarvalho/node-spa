@@ -27,3 +27,14 @@ server.get('/echo/:name', function (req, res, next) {
 server.listen(8080, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
+
+server.get('/', function (req, res, next) {
+  
+   knex('rest').then((dados)=>{
+
+    res.send(dados);
+
+   },next);
+  
+  return next();
+});
