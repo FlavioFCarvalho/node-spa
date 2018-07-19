@@ -31,7 +31,7 @@
         <h1 style="margin-top: 40px;">Lista de nomes</h1>
        
         <div class="row">
-            <div class="">
+            <div class="col-6">
                 <ul class="list-group" id="lista"></ul>
             </div>
         </div>
@@ -55,7 +55,7 @@
                 console.log(response);
 
                 response.data.forEach(element => {
-                    lista.innerHTML += `<li>${element.name} </li> `
+                    lista.innerHTML += `<li class="list-group-item">${element.name} </li> `
                 });
             })
 
