@@ -40,6 +40,14 @@
     <script>
 
         window.onload = () => {
+            const lista = document.querySelector('#lista');
+
+            const botao = document.querySelector('#botao');
+
+            const texto = document.querySelector('#texto');
+
+            botao.addEventListener('click', create);
+
             read();
         };
 
@@ -64,7 +72,19 @@
             });
         }
 
+        function create() {
+            const name = texto.value;
 
+            axios.post('/create', {name})
+            
+                .then(function(response){
+                    console.log(response);
+                })
+
+                .catch(function (error){
+                   console.log(error);
+                });
+        }
 
 
     </script>
