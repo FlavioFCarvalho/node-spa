@@ -51,6 +51,12 @@
             read();
         };
 
+        function templateLi(id, nome){
+            return`
+                <li class="list-group-item">${nome} </li> 
+            `;
+        }
+
         function read(){
         
           //limpando a lista
@@ -63,7 +69,7 @@
                 console.log(response);
 
                 response.data.forEach(element => {
-                    lista.innerHTML += `<li class="list-group-item">${element.name} </li> `
+                    lista.innerHTML += templateLi(element.id, element.name);
                 });
             })
 
@@ -79,6 +85,7 @@
             
                 .then(function(response){
                     console.log(response);
+                    lista.innerHTML += templateLi(response.data[0], name);
                 })
 
                 .catch(function (error){
