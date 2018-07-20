@@ -48,12 +48,19 @@
 
             botao.addEventListener('click', create);
 
+            lista.addEventListener('click', del);
+
             read();
         };
 
         function templateLi(id, nome){
             return`
-                <li class="list-group-item">${nome} </li> 
+                <li class="list-group-item">${nome} 
+                    <i class="btn btn-danger delete fa fa-trash"
+                            style="float: right; margin-left: 5px;"
+                            data-id="${id}"
+                    ></i>
+                </li>  
             `;
         }
 
@@ -91,6 +98,27 @@
                 .catch(function (error){
                    console.log(error);
                 });
+        }
+
+        function del(element) {
+            console.log(element);
+            if (element.target.classList.contains('delete')){
+                // id do elemento a excluir ?
+
+                const id = element.target.dataset.id;
+
+                
+                axios.delete(`/delete/${id}`)
+                    .then(function (response){
+                        if (response.status = 200){
+                            lista.removeChild(element.path[1]);
+                        }
+                    })
+
+                    .catch(function (error){
+                        console.log(error);
+                    });
+            }
         }
 
 
